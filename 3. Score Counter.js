@@ -1,47 +1,51 @@
-// Assigning html to variables
-var p1 = document.querySelector("#playerOne");
-var p2 = document.querySelector("#playerTwo");
-var goalOne = document.querySelector("#playOne");
-var goalTwo = document.querySelector("#playTwo");
+// Query Selectors
+var playerOneScore = document.querySelector("#playerOneScore");
+var playerTwoScore = document.querySelector("#playerTwoScore");
+var playUpTo = document.querySelector("p span");
 var input = document.querySelector("input");
-var goal = document.querySelector("p span");
+var playerOneButton = document.querySelector("#playerOneButton");
+var playerTwoButton = document.querySelector("#playerTwoButton");
+var reset = document.querySelector("#reset");
 
-// Anytime the value "changes"
-// element.value reflects the value in the field. *Note, this returns a string.
-// Therefore, change string to number -> Number(value)
-input.addEventListener("change", function () { 
-	goal.textContent = input.value;
-	compareOp = Number(input.value);
+// Starting counters
+var playerOneCounter = 0; 
+var playerTwoCounter = 0; 
+var compareNumbers = 5;
+
+// Sets how many points the game goes up to.
+input.addEventListener("change", function() {
+	playUpTo.textContent = input.value;
+  compareNumbers = Number(input.value);
 });
 
-// Takes in player one's input and checks if player one wins.
-p1.addEventListener("click", function() {
-	if (goalOne < compareOp && goalTwo !== compareOp) {
-		goalOne++;
-		goalOne.textContent = goalOne;
-	}
-	if (goalOne === compareOp) {
-		goalOne.style.color = "green";
-	}
+// For each click... the numbers go up for player one. Wow!
+playerOneButton.addEventListener("click", function() {
+	if (playerOneCounter < compareNumbers && playerTwoCounter !== compareNumbers) {
+  	playerOneCounter++;
+  	playerOneScore.textContent = playerOneCounter;
+  }	
+  if (playerOneCounter === compareNumbers) {
+  	playerOneScore.style.color = "green";
+  }
 });
 
-
-// Takes in player two's input and checks if player two wins.
-p2.addEventListener("click", function() {
-	if (goalTwo < compareOp && goalOne !== compareOp) {
-		goalTwo++;
-		goalTwo.textContent = goalTwo;
-	}
-	if (goalTwo === compareOp) {
-		goalTwo.style.color = "green";
-	}
+// For each click... the numbers go up for player two. Wow!
+playerTwoButton.addEventListener("click", function() {
+	if (playerTwoCounter < compareNumbers && playerOneCounter !== compareNumbers) {
+		playerTwoCounter++;
+  	playerTwoScore.textContent = playerTwoCounter;
+  }
+  if (playerTwoCounter === compareNumbers) {
+  	playerTwoScore.style.color = "green";
+  }
 });
 
-// Reset button. Resets the game back to original condition.
-var buttonReset = document.querySelector("#reset");
-buttonReset.addEventListener("click", function() {
-	goalOne.textContent = 0;
-	goalTwo.textContent = 0;
-	goalOne.style.color = "black";
-	goalTwo.style.color = "black";
+// Resets game
+reset.addEventListener("click", function() {
+	playerOneScore.textContent = 0;
+  playerTwoScore.textContent = 0;
+  playerOneCounter = 0;
+  playerTwoCounter = 0;
+  playerOneScore.style.color = "black";
+  playerTwoScore.style.color = "black";
 });

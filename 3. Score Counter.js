@@ -6,10 +6,6 @@ var goalTwo = document.querySelector("#playTwo");
 var input = document.querySelector("input");
 var goal = document.querySelector("p span");
 
-// Starting scores
-goalOne = 0;
-goalTwo = 0;
-
 // Anytime the value "changes"
 // element.value reflects the value in the field. *Note, this returns a string.
 // Therefore, change string to number -> Number(value)

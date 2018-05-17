@@ -1,10 +1,14 @@
 // Assigning html to variables
 var p1 = document.querySelector("#playerOne");
 var p2 = document.querySelector("#playerTwo");
-var goalOne = document.querySelector("#goalOne");
-var goalTwo = document.querySelector("#goalTwo");
+var goalOne = document.querySelector("#playOne");
+var goalTwo = document.querySelector("#playTwo");
 var input = document.querySelector("input");
 var goal = document.querySelector("p span");
+
+// Starting scores
+goalOne = 0;
+goalTwo = 0;
 
 // Anytime the value "changes"
 // element.value reflects the value in the field. *Note, this returns a string.
@@ -18,10 +22,10 @@ input.addEventListener("change", function () {
 p1.addEventListener("click", function() {
 	if (goalOne < compareOp && goalTwo !== compareOp) {
 		goalOne++;
-		playOne.textContent = goalOne;
+		goalOne.textContent = goalOne;
 	}
 	if (goalOne === compareOp) {
-		playOne.style.color = "green";
+		goalOne.style.color = "green";
 	}
 });
 
@@ -30,20 +34,18 @@ p1.addEventListener("click", function() {
 p2.addEventListener("click", function() {
 	if (goalTwo < compareOp && goalOne !== compareOp) {
 		goalTwo++;
-		playTwo.textContent = goalTwo;
+		goalTwo.textContent = goalTwo;
 	}
 	if (goalTwo === compareOp) {
-		playTwo.style.color = "green";
+		goalTwo.style.color = "green";
 	}
 });
 
 // Reset button. Resets the game back to original condition.
 var buttonReset = document.querySelector("#reset");
 buttonReset.addEventListener("click", function() {
-	playOne.textContent = 0;
-	playTwo.textContent = 0;
-	playOne.style.color = "black";
-	playTwo.style.color = "black";
-	goalOne = 0;
-	goalTwo = 0;
+	goalOne.textContent = 0;
+	goalTwo.textContent = 0;
+	goalOne.style.color = "black";
+	goalTwo.style.color = "black";
 });

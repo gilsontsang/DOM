@@ -42,3 +42,39 @@ var img = document.querySelector("img");
 // img.style.height = "500px";
 // img.style.border = "2px solid pink";
 // However, if img returns a list instead of a single object, then we must apply a for-loop to loop through each object
+
+/* Changing colors in list through for-loops & "this" keyboard
+var lis = document.querySelectorAll("li");
+
+for (var i = 0; i<lis.length; i++) {
+  lis[i].addEventListener("mouseover", function() {
+    this.style.color = "green";
+  }
+  lis[i].addEventListener("mouseout", function() {
+    this.style.black = "black";
+  }
+  lis[i].addEventListener("click", function() {
+    this.classList.toggle("done"); // done is a class, we need to define this class in CSS
+  }
+}
+
+## In CSS:
+.done {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+## Seperation of concerns idea. We should use CSS for styling and Java should be in charge of triggering the CSS
+.selected {
+  this.style.color = "green";
+}
+
+for (var i = 0; i<lis.length; i++) {
+  lis[i].addEventListener("mouseover", function() {
+    this.classList.add("selected");
+  }
+  lis[i].addEventListener("mouseout", function() {
+    this.classList.remove("selected");
+  }
+}
+*/

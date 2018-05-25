@@ -1,6 +1,6 @@
 var numSquares = 6;
-var colors = generateRandomColors(numSquares);
-var pickedColor = pickColor();
+var colors = [];
+var pickedColor;
 var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var squares = document.querySelectorAll(".square");
@@ -8,54 +8,68 @@ var colorDisplay = document.querySelector("#colorDisplay");
 var messageDisplay = document.querySelector("#message");
 var modeButtons = document.querySelectorAll(".mode");
 
-//first game variable
-colorDisplay.textContent = pickedColor;
+//initialize the game
+init();
 
-//game initialization
-for (var i=0; i<squares.length; i++) {
-  // add initial colors to squares
-  squares[i].style.backgroundColor = colors[i];
-  // add clicklisteners to squares
-  squares[i].addEventListener("click", function() {
-    // compare color to pickedColor
-    var clickedColor = this.style.backgroundColor;
-    // cinoare color to pickedColor
-    if(clickedColor === pickedColor) {
-      messageDisplay.textContent = "Correct";
-      changeColors(clickedColor);
-      h1.style.background = clickedColor;
-      resetButton.textContent = "Play Again?"
-    }
-    else {
-      this.style.backgroundColor = "#232323";
-      messageDisplay.textContent = "Try Again";
-    }
-  })
-}
-
-//mode button event listeners
-for (var i=0; i<modeButtons.length;i++) {
-  modeButtons[i].addEventListener("click", function() {
-  	modeButtons[0].classList.remove("selected");
-    modeButtons[1].classList.remove("selected");
-    this.classList.add("selected");
-    this.textContent === "Easy" ? numSquares = 3: numSquares = 6;   
-    reset();
-  })
-}
-
+//reset button
 resetButton.addEventListener("click", function() {
 	reset();
 })
+
+
+function init() {
+  setupModeButtons();
+  setupSquares();
+  reset();
+}
+
+function setupSquares() {
+  //square event listeners
+  for (var i=0; i<squares.length; i++) {
+    // add initial colors to squares
+    squares[i].style.backgroundColor = colors[i];
+    // add clicklisteners to squares
+    squares[i].addEventListener("click", function() {
+      // compare color to pickedColor
+      var clickedColor = this.style.backgroundColor;
+      // cinoare color to pickedColor
+      if(clickedColor === pickedColor) {
+        messageDisplay.textContent = "Correct";
+        changeColors(clickedColor);
+        h1.style.background = clickedColor;
+        resetButton.textContent = "Play Again?"
+      }
+      else {
+        this.style.backgroundColor = "#232323";
+        messageDisplay.textContent = "Try Again";
+      }
+    })
+	}
+}
+
+//mode buttons event listeners
+function setupModeButtons() {
+  for (var i=0; i<modeButtons.length;i++) {
+    modeButtons[i].addEventListener("click", function() {
+      modeButtons[0].classList.remove("selected");
+      modeButtons[1].classList.remove("selected");
+      this.classList.add("selected");
+      this.textContent === "Easy" ? numSquares = 3: numSquares = 6;   
+      reset();
+    })
+  }
+}
 
 //resets the game
 function reset() {
   //generate all new colors
   colors = generateRandomColors(numSquares);
-  // change colorDisplay to match picked Color
-  colorDisplay.textContent = pickedColor;
   //pick a new random color from array
   pickedColor = pickColor();
+    // change colorDisplay to match picked Color
+  colorDisplay.textContent = pickedColor;
+  // change new game button back to default
+  resetButton.textContent = "New colors";
   //reset h1 color back to background
   h1.style.background = "steelblue";
   //reset Reset button back to New colors
